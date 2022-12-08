@@ -1,14 +1,48 @@
+*.bin
 .gradle
-/build/
 
-# Ignore Gradle GUI config
-gradle-app.setting
+#th2 config files
+/config
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+#elcipse files
+.metadata
+.recommenders
+.settings
+.classpath
+.project
 
-# Cache of project
-.gradletasknamecache
+RemoteSystemsTempFiles
+Servers
 
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
+build
+srcgen
+shared
+gen
+bin
+external
+provided
+
+logs
+
+#temp files
+.*.swp
+.~*.*#
+
+#test files
+derby.log
+
+#IntelliJ IDEA files
+*.iml
+*.iws
+.idea
+*/build
+out
+
+#build info file
+buildinfo.htm
+
+#JMH files
+BenchmarkList
+CompilerHints
+/configs
+/src/test
