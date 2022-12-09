@@ -27,13 +27,8 @@ class CustomConfigurationClass {
     var port: Int = 8080
     var responseTimeout: Int = 60000
 
-    var checkRequestsAliveDelay: Long = 2000
-    val enableCaching: Boolean = true
-    val notModifiedObjectsLifetime: Int = 3600
-    val rarelyModifiedObjects: Int = 500
-
     override fun toString(): String {
-        return "CustomConfigurationClass(arangoHost='$arangoHost', arangoPort=$arangoPort, arangoUser='$arangoUser', arangoPassword='$arangoPassword', arangoDbName='$arangoDbName', hostname='$hostname', port=$port, responseTimeout=$responseTimeout, checkRequestsAliveDelay=$checkRequestsAliveDelay, enableCaching=$enableCaching, notModifiedObjectsLifetime=$notModifiedObjectsLifetime, rarelyModifiedObjects=$rarelyModifiedObjects)"
+        return "CustomConfigurationClass(arangoHost='$arangoHost', arangoPort=$arangoPort, arangoUser='$arangoUser', arangoPassword='$arangoPassword', arangoDbName='$arangoDbName', hostname='$hostname', port=$port, responseTimeout=$responseTimeout)"
     }
 }
 
@@ -61,15 +56,4 @@ class Configuration(customConfiguration: CustomConfigurationClass) {
 
     val responseTimeout: Variable =
         Variable("responseTimeout", customConfiguration.responseTimeout.toString(), "60000")
-
-    val checkRequestsAliveDelay: Variable =
-        Variable("checkRequestsAliveDelay", customConfiguration.checkRequestsAliveDelay.toString(), "2000")
-
-    val enableCaching: Variable = Variable("enableCaching", customConfiguration.enableCaching.toString(), "true")
-
-    val notModifiedObjectsLifetime: Variable =
-        Variable("notModifiedObjectsLifetime", customConfiguration.notModifiedObjectsLifetime.toString(), "3600")
-
-    val rarelyModifiedObjects: Variable =
-        Variable("rarelyModifiedObjects", customConfiguration.rarelyModifiedObjects.toString(), "500")
 }
