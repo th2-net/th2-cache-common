@@ -29,7 +29,7 @@ import java.util.function.Consumer
 
 class Arango(cfg: Configuration) : AutoCloseable {
     private val logger = LoggerFactory.getLogger(Arango::class.java)
-    private val arango = ArangoDB.Builder()
+    private val arangoDB = ArangoDB.Builder()
         .serializer(ArangoJack().apply {
             configure {
                 it.registerModule(KotlinModule.Builder().build())
@@ -39,8 +39,7 @@ class Arango(cfg: Configuration) : AutoCloseable {
         .host(cfg.arangoHost.value, cfg.arangoPort.value.toInt())
         .user(cfg.arangoUser.value).password(cfg.arangoPassword.value)
         .build()
-    private val db = arango.db(DbName.of(cfg.arangoDbName.value))
-
+    private val db = arangoDB.db(DbName.of(cfg.arangoDbName.value))
 
     fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {
         logger.debug("AQL query to execute: $query")
@@ -51,7 +50,7 @@ class Arango(cfg: Configuration) : AutoCloseable {
         return result
     }
 
-    fun <T> executeAqlQuery(query: String, clazz: Class<T>, action: Consumer<T>) {
+    private fun <T> executeAqlQuery(query: String, clazz: Class<T>, action: Consumer<T>) {
         logger.debug("AQL query to execute: $query")
         try {
             val cursor = db.query(
@@ -66,6 +65,6 @@ class Arango(cfg: Configuration) : AutoCloseable {
     }
 
     override fun close() {
-        arango.shutdown()
+        arangoDB.shutdown()
     }
 }
