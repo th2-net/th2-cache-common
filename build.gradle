@@ -32,8 +32,6 @@ dependencies {
     compileOnly 'com.google.auto.service:auto-service:1.0.1'
     kapt 'com.google.auto.service:auto-service:1.0.1'
 
-    implementation 'com.exactpro.th2:common:4.0.0-TH2-4262-reduce-load-book-and-page-3574992387-SNAPSHOT'
-
     implementation 'net.jpountz.lz4:lz4:1.3.0'
     implementation 'io.github.microutils:kotlin-logging:3.0.4'
 
