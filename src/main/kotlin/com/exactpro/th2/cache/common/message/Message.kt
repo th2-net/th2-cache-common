@@ -16,12 +16,11 @@
 
 package com.exactpro.th2.cache.common.message
 
-import com.exactpro.cradle.messages.StoredMessageId
 import java.time.Instant
 
 data class Message(
     val type: String = "message",
-    val id: StoredMessageId,
+    val id: String,
     val timestamp: Instant,
     val sessionId: String,
     val attachedEventIds: Set<String>,
