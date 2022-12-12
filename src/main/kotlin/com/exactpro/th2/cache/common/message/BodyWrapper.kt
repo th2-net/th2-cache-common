@@ -16,11 +16,8 @@
 
 package com.exactpro.th2.cache.common.message
 
-import com.exactpro.th2.common.grpc.Message
-import com.exactpro.th2.common.grpc.MessageID
-
 data class BodyWrapper(
-    val id: MessageID,
+    val id: String,
     val protocol: String,
     val messageType: String,
     val message: Message
