@@ -65,4 +65,11 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
     override fun close() {
         arangoDB.shutdown()
     }
+
+    companion object {
+        const val EVENT_COLLECTION = "events"
+        const val EVENT_EDGES = "event_relations"
+        const val RAW_MESSAGE_COLLECTION = "raw_messages"
+        const val PARSED_MESSAGE_COLLECTION = "parsed_messages"
+    }
 }
