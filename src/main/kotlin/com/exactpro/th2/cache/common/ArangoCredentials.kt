@@ -16,15 +16,10 @@
 
 package com.exactpro.th2.cache.common
 
-
-class ArangoCredentials() {
-    var host: String = "localhost"
-    var port: Int = 8529
-    var username,
-    var password,
-    var database,
-
-    override fun toString(): String {
-        return "ArangoCredentials(host='$host', port=$port, username='$username', password='$password', database='$database')"
-    }
-}
+data class ArangoCredentials(
+    val host: String,
+    val port: Int,
+    val username: String,
+    val password: String,
+    val database: String
+)
