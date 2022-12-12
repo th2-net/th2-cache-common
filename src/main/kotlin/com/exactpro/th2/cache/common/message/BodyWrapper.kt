@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.message
+package com.exactpro.th2.cache.common.message
 
 import com.exactpro.th2.common.grpc.Message
 import com.exactpro.th2.common.grpc.MessageID

@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.db
+package com.exactpro.th2.cache.common
 
 import com.arangodb.ArangoDB
 import com.arangodb.ArangoDBException
 import com.arangodb.DbName
 import com.arangodb.mapping.ArangoJack
 import com.arangodb.model.AqlQueryOptions
-import com.exactpro.th2.cachecommon.entities.configuration.Configuration
 import org.slf4j.LoggerFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import java.util.function.Consumer
 
-class Arango(cfg: Configuration) : AutoCloseable {
+class Arango(credentials: ArangoCredentials) : AutoCloseable {
     private val logger = LoggerFactory.getLogger(Arango::class.java)
     private val arangoDB = ArangoDB.Builder()
         .serializer(ArangoJack().apply {
@@ -36,32 +35,31 @@ class Arango(cfg: Configuration) : AutoCloseable {
                 it.registerModule(JavaTimeModule())
             }
         })
-        .host(cfg.arangoHost.value, cfg.arangoPort.value.toInt())
-        .user(cfg.arangoUser.value).password(cfg.arangoPassword.value)
+        .host(credentials.host, credentials.port)
+        .user(credentials.username)
+        .password(credentials.password)
         .build()
-    private val db = arangoDB.db(DbName.of(cfg.arangoDbName.value))
+    private val db = arangoDB.db(DbName.of(credentials.database))
 
     fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {
-        logger.debug("AQL query to execute: $query")
-        val result = mutableListOf<T>()
-        executeAqlQuery(query, clazz) { aDocument ->
-            result.add(aDocument)
+        logger.debug("Executing AQL query: $query")
+        try {
+            val result = mutableListOf<T>()
+            executeAqlQuery(query, clazz) { doc -> result.add(doc) }
+            return result
+        } catch (e: ArangoDBException) {
+            logger.error("Failed to execute query: $query", e)
+            throw e;
         }
-        return result
     }
 
     private fun <T> executeAqlQuery(query: String, clazz: Class<T>, action: Consumer<T>) {
-        logger.debug("AQL query to execute: $query")
-        try {
-            val cursor = db.query(
-                query, null as AqlQueryOptions?,
-                clazz
-            )
-            cursor.forEachRemaining(action) // Handle each document using action
-            logger.debug("Returned record count: ${cursor.count}")
-        } catch (e: ArangoDBException) {
-            logger.error("Failed to execute query. " + e.message)
-        }
+        val cursor = db.query(
+            query, null as AqlQueryOptions?,
+            clazz
+        )
+        cursor.forEachRemaining(action) // Handle each document using action
+        logger.debug("Fetched records: ${cursor.count}")
     }
 
     override fun close() {

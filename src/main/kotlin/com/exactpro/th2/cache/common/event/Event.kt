@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.event
+package com.exactpro.th2.cache.common.event
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonRawValue

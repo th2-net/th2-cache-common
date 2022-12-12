@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.message
+package com.exactpro.th2.cache.common
 
-import com.exactpro.cradle.messages.StoredMessageId
-import java.time.Instant
 
-data class Message(
-    val type: String = "message",
-    val id: StoredMessageId,
-    val timestamp: Instant,
-    val sessionId: String,
-    val attachedEventIds: Set<String>,
-    val parsedMessageGroup: List<BodyWrapper>?,
-    @Suppress("ArrayInDataClass")
-    val rawMessageBody: ByteArray,
-    val imageType: String?,
-) {
-    val messageId: String
-        get() = id.toString()
+class ArangoCredentials() {
+    var host: String = "localhost"
+    var port: Int = 8529
+    var username,
+    var password,
+    var database,
+
+    override fun toString(): String {
+        return "ArangoCredentials(host='$host', port=$port, username='$username', password='$password', database='$database')"
+    }
 }

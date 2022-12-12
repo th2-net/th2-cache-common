@@ -1,6 +1,7 @@
-package com.exactpro.th2.cachecommon.entities.event
+package com.exactpro.th2.cache.common.event
 
 import com.google.protobuf.Timestamp
+
 
 class EventMetadata (
     val eventId: String?,
