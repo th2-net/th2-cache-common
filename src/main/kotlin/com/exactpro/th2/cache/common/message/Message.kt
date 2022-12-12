@@ -29,6 +29,7 @@ data class Message(
     @Suppress("ArrayInDataClass")
     val rawMessageBody: ByteArray,
     val imageType: String?,
+    val metadata: MessageMetadata
 ) {
     val messageId: String
         get() = id.toString()
