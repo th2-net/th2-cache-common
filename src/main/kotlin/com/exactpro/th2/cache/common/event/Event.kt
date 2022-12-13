@@ -33,7 +33,7 @@ data class Event(
     val startTimestamp: Instant,
     val parentEventId: String?,
     val successful: Boolean,
-    val attachedMessageIds: Set<String>,
+    val attachedMessageIds: Set<String>?,
     @JsonRawValue
     val body: String?
 )
