@@ -67,8 +67,8 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
     }
 
     companion object {
-        const val EVENTS_COLLECTION = "Events"
-        const val MESSAGES_COLLECTION = "messages"
+        const val EVENT_COLLECTION = "Events"
+        const val MESSAGE_COLLECTION = "messages"
         const val EVENTS_GRAPH = "Event_hierarchy_graph"
         const val EVENT_EDGES = "event_relations"
         const val RAW_MESSAGE_COLLECTION = "raw_messages"
