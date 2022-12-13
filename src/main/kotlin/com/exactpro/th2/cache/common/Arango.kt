@@ -53,7 +53,7 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
         }
     }
 
-    private fun <T> executeAqlQuery(query: String, clazz: Class<T>, action: Consumer<T>) {
+    fun <T> executeAqlQuery(query: String, clazz: Class<T>, action: Consumer<T>) {
         val cursor = db.query(
             query, null as AqlQueryOptions?,
             clazz
@@ -67,7 +67,9 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
     }
 
     companion object {
-        const val EVENT_COLLECTION = "events"
+        const val EVENTS_COLLECTION = "Events"
+        const val MESSAGES_COLLECTION = "messages"
+        const val EVENTS_GRAPH = "Event_hierarchy_graph"
         const val EVENT_EDGES = "event_relations"
         const val RAW_MESSAGE_COLLECTION = "raw_messages"
         const val PARSED_MESSAGE_COLLECTION = "parsed_messages"
