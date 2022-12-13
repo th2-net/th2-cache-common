@@ -18,6 +18,7 @@ package com.exactpro.th2.cache.common
 
 import com.arangodb.ArangoDB
 import com.arangodb.ArangoDBException
+import com.arangodb.ArangoDatabase
 import com.arangodb.DbName
 import com.arangodb.mapping.ArangoJack
 import com.arangodb.model.AqlQueryOptions
@@ -41,7 +42,9 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
         .build()
     private val db = arangoDB.db(DbName.of(credentials.database))
 
-    fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {
+    fun getDatabase(): ArangoDatabase =  db
+
+    fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {db
         logger.debug("Executing AQL query: $query")
         try {
             val result = mutableListOf<T>()
@@ -73,5 +76,6 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
         const val EVENT_EDGES = "event_relations"
         const val RAW_MESSAGE_COLLECTION = "raw_messages"
         const val PARSED_MESSAGE_COLLECTION = "parsed_messages"
+        const val EVENT_HIERARCHY_GRAPH = "event_graph"
     }
 }
