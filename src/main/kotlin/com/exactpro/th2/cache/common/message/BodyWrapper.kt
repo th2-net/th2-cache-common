@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.message
+package com.exactpro.th2.cache.common.message
 
-import com.exactpro.cradle.messages.StoredMessageId
-import java.time.Instant
-
-data class Message(
-    val type: String = "message",
-    val id: StoredMessageId,
-    val timestamp: Instant,
-    val sessionId: String,
-    val attachedEventIds: Set<String>,
-    val parsedMessageGroup: List<BodyWrapper>?,
-    @Suppress("ArrayInDataClass")
-    val rawMessageBody: ByteArray,
-    val imageType: String?,
+data class BodyWrapper(
+    val id: String,
+    val protocol: String,
+    val messageType: String,
+    val message: Message
 ) {
-    val messageId: String
-        get() = id.toString()
+    constructor(message: Message) : this(
+        message.metadata.id,
+        message.metadata.protocol,
+        message.metadata.messageType,
+        message
+    )
 }

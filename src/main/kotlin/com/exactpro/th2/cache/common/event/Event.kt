@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.event
+package com.exactpro.th2.cache.common.event
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonRawValue
@@ -33,7 +33,7 @@ data class Event(
     val startTimestamp: Instant,
     val parentEventId: String?,
     val successful: Boolean,
-    val attachedMessageIds: Set<String>,
+    val attachedMessageIds: Set<String>?,
     @JsonRawValue
     val body: String?
 )

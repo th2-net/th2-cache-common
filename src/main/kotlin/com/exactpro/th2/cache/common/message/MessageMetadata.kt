@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.exactpro.th2.cachecommon
 
-fun main() {
-    println("Main")
-}
+package com.exactpro.th2.cache.common.message
+
+import java.time.Instant
+
+data class MessageMetadata (
+    val id: String,
+    val timestamp: Instant,
+    val messageType: String,
+    val properties: Map<String, String>,
+    val protocol: String
+)

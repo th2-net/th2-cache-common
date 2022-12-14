@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.exactpro.th2.cachecommon.entities.message
+package com.exactpro.th2.cache.common.message
 
-import com.exactpro.th2.common.grpc.Message
-import com.exactpro.th2.common.grpc.MessageID
+import java.time.Instant
 
-data class BodyWrapper(
-    val id: MessageID,
-    val protocol: String,
-    val messageType: String,
-    val message: Message
+data class Message(
+    val type: String = "message",
+    val id: String,
+    val timestamp: Instant,
+    val sessionId: String,
+    val attachedEventIds: Set<String>,
+    val parsedMessageGroup: List<BodyWrapper>?,
+    @Suppress("ArrayInDataClass")
+    val rawMessageBody: ByteArray,
+    val imageType: String?,
+    val metadata: MessageMetadata
 ) {
-    constructor(message: Message) : this(
-        message.metadata.id,
-        message.metadata.protocol,
-        message.metadata.messageType,
-        message
-    )
+    val messageId: String
+        get() = id.toString()
 }
