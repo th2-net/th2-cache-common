@@ -76,6 +76,5 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
         const val EVENT_EDGES = "event_relations"
         const val RAW_MESSAGE_COLLECTION = "raw_messages"
         const val PARSED_MESSAGE_COLLECTION = "parsed_messages"
-        const val EVENT_HIERARCHY_GRAPH = "event_graph"
     }
 }
