@@ -16,12 +16,13 @@
 
 package com.exactpro.th2.cache.common.event
 
+import com.arangodb.entity.Key
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonRawValue
 import java.time.Instant
 
 data class Event(
-    val type: String = "event",
+    @Key
     val eventId: String,
     val batchId: String?,
     val isBatched: Boolean,

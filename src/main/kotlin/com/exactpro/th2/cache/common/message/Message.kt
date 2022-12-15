@@ -16,10 +16,11 @@
 
 package com.exactpro.th2.cache.common.message
 
+import com.arangodb.entity.Key
 import java.time.Instant
 
 data class Message(
-    val type: String = "message",
+    @Key
     val id: String,
     val timestamp: Instant,
     val sessionId: String,
@@ -29,7 +30,4 @@ data class Message(
     val rawMessageBody: ByteArray,
     val imageType: String?,
     val metadata: MessageMetadata
-) {
-    val messageId: String
-        get() = id.toString()
-}
+)
