@@ -17,7 +17,6 @@
 package com.exactpro.th2.cache.common.event
 
 import com.arangodb.entity.Key
-import com.fasterxml.jackson.annotation.JsonRawValue
 
 data class Event(
     @Key
@@ -31,6 +30,5 @@ data class Event(
     val parentEventId: String?,
     val successful: Boolean,
     val attachedMessageIds: Set<String>?,
-    @JsonRawValue
     val body: String?
 )
