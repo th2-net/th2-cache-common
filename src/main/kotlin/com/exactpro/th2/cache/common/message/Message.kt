@@ -17,12 +17,11 @@
 package com.exactpro.th2.cache.common.message
 
 import com.arangodb.entity.Key
-import java.time.Instant
 
 data class Message(
     @Key
     val id: String,
-    val timestamp: Instant,
+    val timestamp: Long,
     val sessionId: String,
     val attachedEventIds: Set<String>,
     val parsedMessageGroup: List<BodyWrapper>?,

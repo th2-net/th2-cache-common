@@ -16,11 +16,9 @@
 
 package com.exactpro.th2.cache.common.message
 
-import java.time.Instant
-
 data class MessageMetadata (
     val id: String,
-    val timestamp: Instant,
+    val timestamp: Long,
     val messageType: String,
     val properties: Map<String, String>,
     val protocol: String

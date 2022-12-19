@@ -25,6 +25,7 @@ import com.arangodb.model.AqlQueryOptions
 import org.slf4j.LoggerFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import java.time.Instant
 import java.util.function.Consumer
 
 class Arango(credentials: ArangoCredentials) : AutoCloseable {
@@ -77,3 +78,8 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
         const val PARSED_MESSAGE_COLLECTION = "parsed_messages"
     }
 }
+
+fun toArangoTimestamp(timestamp: Instant): Long =  timestamp.epochSecond shl 32 + timestamp.nano
+
+fun toInstant(timestamp: Long) : Instant = Instant.ofEpochSecond(timestamp shr 32, timestamp and 0xffffffff)
+

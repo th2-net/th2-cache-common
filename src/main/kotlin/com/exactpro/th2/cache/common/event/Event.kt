@@ -17,9 +17,7 @@
 package com.exactpro.th2.cache.common.event
 
 import com.arangodb.entity.Key
-import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonRawValue
-import java.time.Instant
 
 data class Event(
     @Key
@@ -28,10 +26,8 @@ data class Event(
     val isBatched: Boolean,
     val eventName: String,
     val eventType: String?,
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'", timezone = "UTC")
-    val endTimestamp: Instant?,
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'", timezone = "UTC")
-    val startTimestamp: Instant,
+    val startTimestamp: Long,
+    val endTimestamp: Long?,
     val parentEventId: String?,
     val successful: Boolean,
     val attachedMessageIds: Set<String>?,
