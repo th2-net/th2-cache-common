@@ -79,7 +79,7 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
     }
 }
 
-fun toArangoTimestamp(timestamp: Instant): Long =  timestamp.epochSecond shl 32 + timestamp.nano
+fun toArangoTimestamp(timestamp: Instant): Long =  (timestamp.epochSecond shl 20) + timestamp.nano
 
-fun toInstant(timestamp: Long) : Instant = Instant.ofEpochSecond(timestamp shr 32, timestamp and 0xffffffff)
+fun toInstant(timestamp: Long) : Instant = Instant.ofEpochSecond(timestamp shr 20, timestamp and 0b11111111111111111111)
 
