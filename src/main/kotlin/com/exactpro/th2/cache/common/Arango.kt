@@ -79,7 +79,8 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
     }
 }
 
-fun toArangoTimestamp(timestamp: Instant): Long =  (timestamp.epochSecond shl 20) + timestamp.nano
-
-fun toInstant(timestamp: Long) : Instant = Instant.ofEpochSecond(timestamp shr 20, timestamp and 0b11111111111111111111)
+private val BITS_NANO = 20;
+private val MASK_NANO = (1L shl BITS_NANO) - 1;
+fun toArangoTimestamp(timestamp: Instant): Long =  (timestamp.epochSecond shl BITS_NANO) + (timestamp.nano.toLong() and MASK_NANO)
+fun toInstant(arangoTimestamp: Long) : Instant = Instant.ofEpochSecond(arangoTimestamp shr BITS_NANO, arangoTimestamp and MASK_NANO)
 
