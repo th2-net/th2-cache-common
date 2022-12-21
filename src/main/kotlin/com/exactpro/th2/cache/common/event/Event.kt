@@ -21,6 +21,9 @@ import com.arangodb.entity.Key
 data class Event(
     @Key
     val eventId: String,
+    val book: String,
+    val scope: String,
+    val id: String,
     val batchId: String?,
     val isBatched: Boolean,
     val eventName: String,
