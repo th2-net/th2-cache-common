@@ -21,6 +21,10 @@ import com.arangodb.entity.Key
 data class Message(
     @Key
     val id: String,
+    val book: String,
+    val direction: Direction,
+    val sequence: Long,
+    val subsequence: List<Int>,
     val timestamp: Long,
     val sessionId: String,
     val attachedEventIds: Set<String>,
@@ -30,3 +34,7 @@ data class Message(
     val imageType: String?,
     val metadata: MessageMetadata
 )
+
+enum class Direction {
+    FIRST, SECOND
+}
