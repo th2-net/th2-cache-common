@@ -22,7 +22,7 @@ data class Message(
     @Key
     val id: String,
     val book: String,
-    val direction: Direction,
+    val direction: String,
     val sequence: Long,
     val subsequence: List<Int>,
     val timestamp: Long,
@@ -34,7 +34,3 @@ data class Message(
     val imageType: String?,
     val metadata: MessageMetadata
 )
-
-enum class Direction {
-    FIRST, SECOND
-}
