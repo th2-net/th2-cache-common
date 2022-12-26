@@ -16,10 +16,17 @@
 
 package com.exactpro.th2.cache.common.message
 
-data class MessageMetadata (
+data class ParsedMessageMetadata (
     val id: String,
     val timestamp: Long,
     val messageType: String,
+    val properties: Map<String, String>,
+    val protocol: String
+)
+
+data class RawMessageMetadata (
+    val id: String,
+    val timestamp: Long,
     val properties: Map<String, String>,
     val protocol: String
 )
