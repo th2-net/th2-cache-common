@@ -20,9 +20,9 @@ data class BodyWrapper(
     val id: String,
     val protocol: String,
     val messageType: String,
-    val message: Message
+    val message: ParsedMessage
 ) {
-    constructor(message: Message) : this(
+    constructor(message: ParsedMessage) : this(
         message.metadata.id,
         message.metadata.protocol,
         message.metadata.messageType,

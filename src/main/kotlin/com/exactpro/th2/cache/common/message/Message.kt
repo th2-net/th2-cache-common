@@ -18,10 +18,30 @@ package com.exactpro.th2.cache.common.message
 
 import com.arangodb.entity.Key
 
-data class Message(
+data class RawMessage (
     @Key
     val id: String,
     val book: String,
+    val group: String,
+    val sessionAlias: String,
+    val direction: String,
+    val sequence: Long,
+    val subsequence: List<Int>,
+    val timestamp: Long,
+    val sessionId: String,
+    val attachedEventIds: Set<String>,
+    @Suppress("ArrayInDataClass")
+    val rawMessageBody: ByteArray,
+    val imageType: String?,
+    val metadata: MessageMetadata
+)
+
+data class ParsedMessage (
+    @Key
+    val id: String,
+    val book: String,
+    val group: String,
+    val sessionAlias: String,
     val direction: String,
     val sequence: Long,
     val subsequence: List<Int>,
@@ -29,8 +49,6 @@ data class Message(
     val sessionId: String,
     val attachedEventIds: Set<String>,
     val parsedMessageGroup: List<BodyWrapper>?,
-    @Suppress("ArrayInDataClass")
-    val rawMessageBody: ByteArray,
     val imageType: String?,
     val metadata: MessageMetadata
 )
