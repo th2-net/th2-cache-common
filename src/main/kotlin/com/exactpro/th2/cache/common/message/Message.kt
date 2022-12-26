@@ -33,7 +33,7 @@ data class RawMessage (
     @Suppress("ArrayInDataClass")
     val rawMessageBody: ByteArray,
     val imageType: String?,
-    val metadata: MessageMetadata
+    val metadata: RawMessageMetadata
 )
 
 data class ParsedMessage (
@@ -50,5 +50,5 @@ data class ParsedMessage (
     val attachedEventIds: Set<String>,
     val parsedMessageGroup: List<BodyWrapper>?,
     val imageType: String?,
-    val metadata: MessageMetadata
+    val metadata: ParsedMessageMetadata
 )
