@@ -31,7 +31,7 @@ data class RawMessage (
     val sessionId: String,
     val attachedEventIds: Set<String>,
     @Suppress("ArrayInDataClass")
-    val rawMessageBody: ByteArray,
+    val body: ByteArray,
     val imageType: String?,
     val metadata: RawMessageMetadata
 )
