@@ -26,7 +26,6 @@ data class RawMessage (
     val sessionAlias: String,
     val direction: String,
     val sequence: Long,
-    val subsequence: List<Int>,
     val timestamp: Long,
     val attachedEventIds: Set<String>,
     @Suppress("ArrayInDataClass")
