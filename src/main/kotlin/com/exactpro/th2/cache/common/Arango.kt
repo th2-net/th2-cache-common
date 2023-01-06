@@ -25,7 +25,6 @@ import com.arangodb.model.AqlQueryOptions
 import org.slf4j.LoggerFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import java.lang.Exception
 import java.time.Instant
 import java.util.function.Consumer
 import java.util.function.Predicate
