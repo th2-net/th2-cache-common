@@ -46,7 +46,7 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
 
     fun getDatabase(): ArangoDatabase =  db
 
-    fun <T> executeAqlQuery(query: String, filter: Predicate<T>, clazz: Class<T>): List<T> {
+    fun <T> executeAqlQuery(query: String, filter: Predicate<T?>, clazz: Class<T>): List<T> {
         logger.debug("Executing AQL query: $query")
         try {
             val result = mutableListOf<T>()
