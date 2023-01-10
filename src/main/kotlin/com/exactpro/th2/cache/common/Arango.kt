@@ -46,6 +46,18 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
 
     fun getDatabase(): ArangoDatabase =  db
 
+    fun <T> executeAqlQuery(query: String, filter: Predicate<T>, clazz: Class<T>): List<T> {
+        logger.debug("Executing AQL query: $query")
+        try {
+            val result = mutableListOf<T>()
+            executeAqlQuery(query, clazz) { doc -> if (filter.test(doc)) result.add(doc) }
+            return result
+        } catch (e: ArangoDBException) {
+            logger.error("Failed to execute query: $query", e)
+            throw e
+        }
+    }
+
     fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {
         logger.debug("Executing AQL query: $query")
         try {
