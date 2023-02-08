@@ -30,7 +30,6 @@ data class RawMessage (
     val attachedEventIds: Set<String>,
     @Suppress("ArrayInDataClass")
     val body: ByteArray,
-    val imageType: String?,
     val metadata: RawMessageMetadata
 )
 
@@ -45,7 +44,5 @@ data class ParsedMessage (
     val subsequence: List<Int>,
     val timestamp: Long,
     val attachedEventIds: Set<String>,
-    val parsedMessageGroup: List<BodyWrapper>?,
-    val imageType: String?,
     val metadata: ParsedMessageMetadata
 )
