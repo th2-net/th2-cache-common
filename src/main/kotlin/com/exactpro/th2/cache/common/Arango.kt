@@ -27,6 +27,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import java.time.Instant
 import java.util.function.Consumer
+import java.util.function.Predicate
 
 class Arango(credentials: ArangoCredentials) : AutoCloseable {
     private val logger = LoggerFactory.getLogger(Arango::class.java)
@@ -45,7 +46,19 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
 
     fun getDatabase(): ArangoDatabase =  db
 
-    fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {db
+    fun <T> executeAqlQuery(query: String, filter: Predicate<T?>, clazz: Class<T>): List<T> {
+        logger.debug("Executing AQL query: $query")
+        try {
+            val result = mutableListOf<T>()
+            executeAqlQuery(query, clazz) { doc -> if (filter.test(doc)) result.add(doc) }
+            return result
+        } catch (e: ArangoDBException) {
+            logger.error("Failed to execute query: $query", e)
+            throw e
+        }
+    }
+
+    fun <T> executeAqlQuery(query: String, clazz: Class<T>): List<T> {
         logger.debug("Executing AQL query: $query")
         try {
             val result = mutableListOf<T>()
@@ -53,7 +66,7 @@ class Arango(credentials: ArangoCredentials) : AutoCloseable {
             return result
         } catch (e: ArangoDBException) {
             logger.error("Failed to execute query: $query", e)
-            throw e;
+            throw e
         }
     }
 
@@ -85,4 +98,3 @@ private val BITS_NANO = 20;
 private val MASK_NANO = (1L shl BITS_NANO) - 1;
 fun toArangoTimestamp(timestamp: Instant): Long =  (timestamp.epochSecond shl BITS_NANO) + (timestamp.nano.toLong() and MASK_NANO)
 fun toInstant(arangoTimestamp: Long) : Instant = Instant.ofEpochSecond(arangoTimestamp shr BITS_NANO, arangoTimestamp and MASK_NANO)
-
