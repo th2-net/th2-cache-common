@@ -43,9 +43,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
-    implementation 'com.arangodb:arangodb-java-driver:6.20.0'
-    implementation 'com.arangodb:jackson-dataformat-velocypack:3.1.0'
-
+    api 'com.arangodb:arangodb-java-driver:6.20.0'
+    api 'com.arangodb:jackson-dataformat-velocypack:4.0.0'
 }
 
 jar {
