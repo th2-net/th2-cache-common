@@ -22,8 +22,8 @@ data class RawMessage (
     @Key
     val id: String,
     val book: String,
-    val group: String,
-    val sessionAlias: String,
+    val group: String?,
+    val sessionAlias: String?,
     val direction: String,
     val sequence: Long,
     val timestamp: Long,
@@ -37,8 +37,8 @@ data class ParsedMessage (
     @Key
     val id: String,
     val book: String,
-    val group: String,
-    val sessionAlias: String,
+    val group: String?,
+    val sessionAlias: String?,
     val direction: String,
     val sequence: Long,
     val subsequence: List<Int>,
