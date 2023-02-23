@@ -44,7 +44,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     api 'com.arangodb:arangodb-java-driver:6.20.0'
-//    api 'com.arangodb:velocypack:3.0.0'
     api 'com.arangodb:jackson-dataformat-velocypack:4.0.0'
 }
 
